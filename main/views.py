@@ -7,11 +7,13 @@ from main.models import levelMod
 def home(request):
 
     if request.user.is_authenticated:
-        obj = levelMod.objects.get(email=request.user.email)
-        lev = obj.level
-        return render(request, 'home.html', {'level': lev})
-    else:
-        return render(request, 'home.html')    
+        temp = levelMod.objects.filter(email=request.user.email)
+        if temp.exists():
+            obj = levelMod.objects.get(email=request.user.email)
+            lev = obj.level
+            return render(request, 'home.html', {'level': lev})
+    
+    return render(request, 'home.html')    
 
 def gameEnds(request):
     if request.user.is_authenticated and request.method == 'GET':

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 
+from main.models import levelMod
+
 
 def login(request):
     if request.method== 'POST':
@@ -40,6 +42,8 @@ def signup(request):
             else:   
                 user = User.objects.create_user(username=username, password=password1, email=email,first_name=first_name,last_name=last_name)
                 user.save()
+                sc = levelMod.objects.create(name=username, email=email, score=0, level="Bot")   
+                sc.save()
                 print('user created')
                 return redirect('login')
 

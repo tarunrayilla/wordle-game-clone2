@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wordsTriedCount += 1;
 
         if (currentWord === word) {
-            // window.alert("Congratulations!");
+            window.alert("Congratulations!");
 
             
 
@@ -99,6 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleDeleteLetter() {
         const currWordArr = getCurrWordArr();
+        if(currWordArr.length === 0) {
+          return
+      }
         const removedLetter = currWordArr.pop();
     
         wordsTried[wordsTried.length - 1] = currWordArr;
